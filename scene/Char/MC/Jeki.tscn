@@ -1,0 +1,86 @@
+[gd_scene load_steps=15 format=3 uid="uid://qqwm8p1tjyxc"]
+
+[ext_resource type="Script" uid="uid://docmnsa8mw4hq" path="res://script/MC/jeki.gd" id="1_og1vh"]
+[ext_resource type="Texture2D" uid="uid://c2ar5u6kboye5" path="res://assets/Jeki/walk/MC Walk 1.png" id="2_2hv73"]
+[ext_resource type="Texture2D" uid="uid://bd0vbkmuajeb3" path="res://assets/Jeki/walk/MC walk 2.png" id="3_vuo4q"]
+[ext_resource type="Texture2D" uid="uid://dqcu1effidi3y" path="res://assets/Jeki/walk/MC walk 3.png" id="4_vmmxd"]
+[ext_resource type="Texture2D" uid="uid://d0slmmf3418o2" path="res://assets/Jeki/walk/MC walk 4.png" id="5_0fanj"]
+[ext_resource type="Texture2D" uid="uid://bku3n2u6rqrat" path="res://assets/Jeki/walk/walk 5.png" id="6_ilc4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uthkx"]
+size = Vector2(19, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qynv"]
+atlas = ExtResource("2_2hv73")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygodo"]
+atlas = ExtResource("4_vmmxd")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5gaw"]
+atlas = ExtResource("6_ilc4j")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t6rs"]
+atlas = ExtResource("3_vuo4q")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8fok"]
+atlas = ExtResource("2_2hv73")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56hqm"]
+atlas = ExtResource("5_0fanj")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y8fok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qynv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygodo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5gaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t6rs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8fok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56hqm")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[node name="Jeki" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_og1vh")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -22)
+shape = SubResource("RectangleShape2D_uthkx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -17)
+scale = Vector2(0.135, 0.135)
+sprite_frames = SubResource("SpriteFrames_y8fok")
+animation = &"run"
+autoplay = "idle"
+frame_progress = 0.124169
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -20)
+zoom = Vector2(3.5, 3.5)

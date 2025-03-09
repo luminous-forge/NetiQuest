@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://cee4lvuclr7qi"]
+
+[ext_resource type="Script" uid="uid://cxos55nwu0pi7" path="res://script/NPC/mila.gd" id="1_uclju"]
+[ext_resource type="Texture2D" uid="uid://d3sn7a8nofntm" path="res://assets/Test MC/Idle.png" id="2_mv6eo"]
+[ext_resource type="Script" uid="uid://4fv7hoxkyww" path="res://addons/dialogic/Core/DialogicGameHandler.gd" id="3_mv6eo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3pq0"]
+atlas = ExtResource("2_mv6eo")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72c2m"]
+atlas = ExtResource("2_mv6eo")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo4sh"]
+atlas = ExtResource("2_mv6eo")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8so4"]
+atlas = ExtResource("2_mv6eo")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_butq2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3pq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72c2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo4sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8so4")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykbby"]
+size = Vector2(74, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uclju"]
+size = Vector2(20, 44)
+
+[node name="Mila" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "area2d")]
+script = ExtResource("1_uclju")
+sprite = NodePath("AnimatedSprite2D")
+area2d = NodePath("Area2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -26)
+sprite_frames = SubResource("SpriteFrames_butq2")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="interaksi" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_ykbby")
+debug_color = Color(0.691539, 0.491517, 0.210815, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -22)
+shape = SubResource("RectangleShape2D_uclju")
+disabled = true
+
+[node name="DialogicGameHandler" type="Node" parent="."]
+script = ExtResource("3_mv6eo")
+metadata/_custom_type_script = "uid://4fv7hoxkyww"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,0 +1,8 @@
+join "Test Bot" left [animation="Slide In Left" length="1.0" mirrored="true"]
+"Test Bot": Hai aku Test Bot
+- Hai Cantik
+	"Test Bot": Hai Juga ganteng ku
+	[end_timeline]
+- Kmu kok cantik sih
+	"Test Bot": Eh Ingat Cinta yah!
+	[end_timeline]
